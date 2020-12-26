@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MovieDB</string>
+    <string name="genre">Tür: </string>
+    <string name="crew">Ekip</string>
+    <string name="cast">Oyuncular</string>
 </resources>

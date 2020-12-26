@@ -2,6 +2,7 @@ package com.utkukutlu.moviedb.repository
 
 import com.utkukutlu.moviedb.Config
 import com.utkukutlu.moviedb.model.Resource
+import com.utkukutlu.moviedb.model.response.CreditsResponse
 import com.utkukutlu.moviedb.model.response.PopularTvShowsResponse
 import com.utkukutlu.moviedb.util.ApiService
 import com.utkukutlu.moviedb.util.fetchResponse
@@ -13,6 +14,11 @@ class TvRepository {
         val params = Config.getDefaultParams()
         params["page"] = page
         return ApiService.on.getPopularTvShows(params).fetchResponse()
+    }
+
+    fun getCredits(tvId: Int): Observable<Resource<CreditsResponse>> {
+        val params = Config.getDefaultParams()
+        return ApiService.on.getCredits(tvId, params).fetchResponse()
     }
 
 }

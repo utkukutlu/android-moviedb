@@ -1,7 +1,9 @@
 package com.utkukutlu.moviedb.util
 
+import android.content.res.Resources
 import android.view.View
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.utkukutlu.moviedb.R
@@ -12,6 +14,18 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
+val screenWidth: Int by lazy {
+    Resources.getSystem().displayMetrics.widthPixels
+}
+
+fun <T> List<T>.toArrayList(): ArrayList<T> {
+    val arrayList = arrayListOf<T>()
+    this.forEach {
+        arrayList.add(it)
+    }
+    return arrayList
+}
+
 fun View.gone() {
     visibility = View.GONE
 }
@@ -20,7 +34,8 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
-fun ImageView.loadUrl(url: String) {
+@BindingAdapter("app:loadUrl")
+fun ImageView.loadUrl(url: String?) {
     Glide.with(this)
         .load(url)
         .apply(
@@ -35,13 +50,13 @@ fun Disposable.addToCompositeDisposable(compositeDisposable: CompositeDisposable
 
 fun <T> Single<T>.fetchResponse(): Observable<Resource<T>> {
     return Observable.create { emitter ->
-        emitter.onNext(Resource.Loading)
+        emitter.onNext(Resource.loading())
         subscribeOn(Schedulers.io())
             .subscribe({
-                emitter.onNext(Resource.Success(it))
+                emitter.onNext(Resource.success(it))
                 emitter.onComplete()
             }, {
-                emitter.onNext(Resource.Error(it.message ?: ""))
+                emitter.onNext(Resource.error(it.message ?: ""))
                 emitter.onComplete()
             })
     }
