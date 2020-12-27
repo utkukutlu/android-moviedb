@@ -5,6 +5,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         tools:context=".ui.ListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -16,7 +17,7 @@
             android:id="@+id/layout_progress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/black"
             android:clickable="true"
             android:focusable="true"
             android:visibility="gone">

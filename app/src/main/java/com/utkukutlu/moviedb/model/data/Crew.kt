@@ -7,7 +7,7 @@ data class Crew(
     val name: String,
     @Json(name = "profile_path")
     val profilePath: String?,
-    val job: String
+    val job: String?
 ) {
     fun fullProfilePath() = if (profilePath.isNullOrEmpty()) {
         null

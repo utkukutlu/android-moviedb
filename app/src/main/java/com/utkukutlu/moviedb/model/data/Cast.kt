@@ -6,8 +6,8 @@ data class Cast(
     val id: Int,
     val name: String,
     @Json(name = "profile_path")
-    val profilePath: String,
-    val character: String
+    val profilePath: String?,
+    val character: String?
 ) {
     fun fullProfilePath() = if (profilePath.isNullOrEmpty()) {
         null
